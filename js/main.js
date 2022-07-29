@@ -9,7 +9,6 @@ var car = {
   stopped: true
 };
 
-data.positionLeft = 0;
 window.addEventListener('keydown', handleInput);
 
 function handleInput(event) {
@@ -36,9 +35,9 @@ function handleInput(event) {
       } else {
         stopCar();
       }
-
       break;
     default:
+      // do nothing
       break;
   }
 }
@@ -61,7 +60,6 @@ function turnCar(direction) {
 
 function startCar() {
   car.started = true;
-  data.carMoving = true;
   if (car.started) {
     car.stopped = false;
     return setInterval(moveCar, 16);
@@ -71,7 +69,6 @@ function startCar() {
 function stopCar() {
   clearInterval(intervalID);
   car.stopped = true;
-  data.carMoving = false;
 }
 
 function moveCar() {
@@ -93,5 +90,4 @@ function moveCar() {
       data.positionTop--;
       car.$image.style.top = data.positionTop.toString() + 'rem';
   }
-
 }
