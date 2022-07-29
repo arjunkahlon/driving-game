@@ -1,8 +1,12 @@
+/* global data */
+
 var car = {
   $image: document.querySelector('#car-img'),
-  direction: 'right'
+  direction: 'right',
+  started: false
 };
 
+data.positionLeft = 0;
 window.addEventListener('keydown', handleInput);
 
 function handleInput(event) {
@@ -23,6 +27,14 @@ function handleInput(event) {
       car.direction = 'right';
       turnCar();
       break;
+    case ' ':
+      if (!car.started) {
+        var intervalID = startCar();
+      } else {
+        clearInterval(intervalID);
+      }
+
+      break;
     default:
       break;
   }
@@ -42,4 +54,14 @@ function turnCar(direction) {
     case 'up':
       car.$image.style.transform = 'rotate(-90deg)';
   }
+}
+
+function startCar() {
+  car.started = true;
+  return setInterval(moveCar, 16);
+}
+
+function moveCar() {
+  data.positionLeft += 1;
+  car.$image.style.left = data.positionLeft.toString() + 'rem';
 }
