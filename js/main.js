@@ -1,9 +1,12 @@
 /* global data */
 
+var intervalID = 0;
+
 var car = {
   $image: document.querySelector('#car-img'),
   direction: 'right',
-  started: false
+  started: false,
+  stopped: true
 };
 
 data.positionLeft = 0;
@@ -28,10 +31,10 @@ function handleInput(event) {
       turnCar();
       break;
     case ' ':
-      if (!car.started) {
-        var intervalID = startCar();
+      if (car.stopped) {
+        intervalID = startCar();
       } else {
-        clearInterval(intervalID);
+        stopCar();
       }
 
       break;
@@ -58,7 +61,17 @@ function turnCar(direction) {
 
 function startCar() {
   car.started = true;
-  return setInterval(moveCar, 16);
+  data.carMoving = true;
+  if (car.started) {
+    car.stopped = false;
+    return setInterval(moveCar, 16);
+  }
+}
+
+function stopCar() {
+  clearInterval(intervalID);
+  car.stopped = true;
+  data.carMoving = false;
 }
 
 function moveCar() {
