@@ -23,6 +23,9 @@ function handleInput(event) {
       car.direction = 'right';
       turnCar();
       break;
+    case ' ':
+      // console.log('space');
+      break;
     default:
       break;
   }
