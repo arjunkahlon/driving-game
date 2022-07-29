@@ -75,6 +75,23 @@ function stopCar() {
 }
 
 function moveCar() {
-  data.positionLeft += 1;
-  car.$image.style.left = data.positionLeft.toString() + 'rem';
+
+  switch (car.direction) {
+    case 'left':
+      data.positionLeft--;
+      car.$image.style.left = data.positionLeft.toString() + 'rem';
+      break;
+    case 'right':
+      data.positionLeft++;
+      car.$image.style.left = data.positionLeft.toString() + 'rem';
+      break;
+    case 'down':
+      data.positionTop++;
+      car.$image.style.top = data.positionTop.toString() + 'rem';
+      break;
+    case 'up':
+      data.positionTop--;
+      car.$image.style.top = data.positionTop.toString() + 'rem';
+  }
+
 }
